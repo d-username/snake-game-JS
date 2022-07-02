@@ -1,6 +1,6 @@
 let start, totalTimeElapsed, previousTimeStamp;
 let gameOver = false;
-const snakeSpeed = 1;
+const snakeSpeed = 2;
 
 function gameFlow(currentTime) {
   if (start === undefined) {
@@ -33,13 +33,14 @@ window.requestAnimationFrame(gameFlow);
 
 const gameBoard = document.getElementById('game-board-grid');
 
-const snakeBody = [
-  //add to the head { x: 9, y: 10 }
+let snakeBody = [
   { x: 10, y: 10 },
-  { x: 11, y: 10 },
-  { x: 12, y: 10 },
-  { x: 13, y: 10 },
-  { x: 14, y: 10 } /* <--- remove this line from the tail.*/,
+  //   { x: 11, y: 10 },
+  //   { x: 12, y: 10 },
+  //   { x: 13, y: 10 },
+  //   { x: 14, y: 10 },
+  //   { x: 15, y: 10 },
+  //   { x: 16, y: 10 },
 ];
 
 function drawSnake() {
@@ -56,6 +57,11 @@ function drawSnake() {
 
 // NOTES: i grabbed the gameBoard from DOM, created the snakeBody as an array of objects, each object represents one coordinate of a snake segment. the drawSnake() takes each segment and created a div on the gameBoard, places it where they have to be and adds class for styling.
 
+// DOCUMENTATION i used here:
+// https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
+
+let direction = { x: 0, y: 0 };
+
 function moveSnake() {
   //what i want to do....
   // i want to remove the last one....and add one to the front...
@@ -66,10 +72,13 @@ function moveSnake() {
   // - **.pop()** removes an element at the end of an array.
 
   const head = snakeBody[0];
-  let direction = { x: head.x + 1, y: head.y };
 
-  snakeBody.unshift(direction);
-  snakeBody.pop();
+  // TODO:may have problem here...
+  head.x += direction.x;
+  head.y += direction.y;
+
+  //   snakeBody.unshift(head);
+  //   snakeBody.pop();
 }
 
 // NOTES: the moveSnake() find the first segment and in the direction we can change the position of the new element. then i .unshift() this new element ie: the head of the snake, and .pop() the last element from the array.
@@ -85,3 +94,25 @@ function moveSnake() {
 //   snakeBody[0].x += 0;
 //   snakeBody[0].y += 1;
 // }
+
+// DOCUMENTATION i used here:
+// https://developer.mozilla.org/en-US/docs/Web/API/Document/keydown_event
+//developer.mozilla.org/en-US/docs/Web/Events
+
+document.addEventListener('keydown', changeDirection);
+
+function changeDirection(e) {
+  console.log(e.code);
+  if (e.code === 'ArrowUp') {
+    direction = { x: 0, y: -1 };
+  }
+  if (e.code === 'ArrowLeft') {
+    direction = { x: -1, y: 0 };
+  }
+  if (e.code === 'ArrowDown') {
+    direction = { x: 0, y: +1 };
+  }
+  if (e.code === 'ArrowRight') {
+    direction = { x: +1, y: 0 };
+  }
+}
