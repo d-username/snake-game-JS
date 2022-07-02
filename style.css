@@ -25,3 +25,13 @@ body {
     grid-template-columns: repeat(35, 1fr);
     grid-template-rows: repeat(35, 1fr);
 }
+
+.snake {
+    background-color: #f61568;
+    border: 1px solid black;
+}
+
+.food {
+    background-color: orange;
+    border: 1px solid black;
+}

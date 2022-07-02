@@ -1,6 +1,6 @@
 let start, totalTimeElapsed, previousTimeStamp;
 let gameOver = false;
-const snakeSpeed = 2;
+const snakeSpeed = 3;
 
 function gameFlow(currentTime) {
   if (start === undefined) {
@@ -22,6 +22,7 @@ function gameFlow(currentTime) {
 
   drawSnake();
   moveSnake();
+  drawFood();
 }
 
 window.requestAnimationFrame(gameFlow);
@@ -78,8 +79,6 @@ function moveSnake() {
 // https://developer.mozilla.org/en-US/docs/Web/API/Document/keydown_event
 // https://developer.mozilla.org/en-US/docs/Web/Events
 
-// TODO:  i want to make sure the snake cannot switch direction on the spot -ie: if goes right then cannot switch to left
-
 document.addEventListener('keydown', changeDirection);
 
 function changeDirection(e) {
@@ -97,3 +96,25 @@ function changeDirection(e) {
     direction = { x: +1, y: 0 };
   }
 }
+
+const food = [{ x: 21, y: 30 }];
+
+function drawFood() {
+  food.forEach((item) => {
+    const food = document.createElement('div');
+    food.style.gridRowStart = item.y;
+    food.style.gridColumnStart = item.x;
+    food.classList.add('food');
+    gameBoard.append(food);
+  });
+}
+
+// NOTES: drawFood() works just like drawSnake() - it displayes a division on the game board. coordinates of the food is const food.
+
+// TODO:  i want to make sure the snake cannot switch direction on the spot -ie: if goes right then cannot switch to left
+// TODO: i want to create a variable for the expension, lets say whe eats an apple it will grow by 1 but when eat an orange it will grow by 2
+// TODO: after each render i want to check if fruit is eaten, create a function for this.
+// TODO: if sneak head touches the fruit, then i want to remove the fruit from the board, and grow the snake.
+// TODO: this will be done by a function which will take the location of the fuit and push it into the snakeBody
+// TODO: food should be placed in random positions, but never on a position where the snake is already.
+// TODO: game-over: if snake hits wall, or if snake hits itself
