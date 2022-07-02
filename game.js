@@ -21,6 +21,7 @@ function gameFlow(currentTime) {
   previousTimeStamp = currentTime;
 
   drawSnake();
+  moveSnake();
 }
 
 window.requestAnimationFrame(gameFlow);
@@ -33,23 +34,54 @@ window.requestAnimationFrame(gameFlow);
 const gameBoard = document.getElementById('game-board-grid');
 
 const snakeBody = [
-  { x: 1, y: 1 },
-  { x: 2, y: 1 },
-  { x: 3, y: 1 },
-  { x: 4, y: 1 },
-  { x: 5, y: 1 },
+  //add to the head { x: 9, y: 10 }
+  { x: 10, y: 10 },
+  { x: 11, y: 10 },
+  { x: 12, y: 10 },
+  { x: 13, y: 10 },
+  { x: 14, y: 10 } /* <--- remove this line from the tail.*/,
 ];
 
 function drawSnake() {
+  // this is important -- before we re-draw the snake we must clear off the game board
+  gameBoard.innerHTML = '';
   snakeBody.forEach((segment) => {
     const snakeSegment = document.createElement('div');
-    snakeSegment.style.gridRowStart = segment.x;
-    snakeSegment.style.gridColumnStart = segment.y;
+    snakeSegment.style.gridRowStart = segment.y;
+    snakeSegment.style.gridColumnStart = segment.x;
     snakeSegment.classList.add('snake');
     gameBoard.append(snakeSegment);
-    console.log('drawing snake');
-    console.log(segment);
   });
 }
 
 // NOTES: i grabbed the gameBoard from DOM, created the snakeBody as an array of objects, each object represents one coordinate of a snake segment. the drawSnake() takes each segment and created a div on the gameBoard, places it where they have to be and adds class for styling.
+
+function moveSnake() {
+  //what i want to do....
+  // i want to remove the last one....and add one to the front...
+  // do a loop and on each key...shift the value to the value of the higher key....
+  // - **push()** adds element at the start of an array
+  // - **unshift()** adds element at the end of an array
+  // - **.shift()** removes an element at the start of an array.
+  // - **.pop()** removes an element at the end of an array.
+
+  const head = snakeBody[0];
+  let direction = { x: head.x + 1, y: head.y };
+
+  snakeBody.unshift(direction);
+  snakeBody.pop();
+}
+
+// NOTES: the moveSnake() find the first segment and in the direction we can change the position of the new element. then i .unshift() this new element ie: the head of the snake, and .pop() the last element from the array.
+
+// NOTES: the implementation below works as well, but i find my version much simpler.
+
+// **********this works just fine *************
+
+// function moveSnake() {
+//   for (let i = snakeBody.length - 2; i >= 0; i--) {
+//     snakeBody[i + 1] = { ...snakeBody[i] };
+//   }
+//   snakeBody[0].x += 0;
+//   snakeBody[0].y += 1;
+// }
