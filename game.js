@@ -35,12 +35,12 @@ const gameBoard = document.getElementById('game-board-grid');
 
 let snakeBody = [
   { x: 10, y: 10 },
-  //   { x: 11, y: 10 },
-  //   { x: 12, y: 10 },
-  //   { x: 13, y: 10 },
-  //   { x: 14, y: 10 },
-  //   { x: 15, y: 10 },
-  //   { x: 16, y: 10 },
+  { x: 11, y: 10 },
+  { x: 12, y: 10 },
+  { x: 13, y: 10 },
+  { x: 14, y: 10 },
+  { x: 15, y: 10 },
+  { x: 16, y: 10 },
 ];
 
 function drawSnake() {
@@ -63,41 +63,22 @@ function drawSnake() {
 let direction = { x: 0, y: 0 };
 
 function moveSnake() {
-  //what i want to do....
-  // i want to remove the last one....and add one to the front...
-  // do a loop and on each key...shift the value to the value of the higher key....
-  // - **push()** adds element at the start of an array
-  // - **unshift()** adds element at the end of an array
-  // - **.shift()** removes an element at the start of an array.
-  // - **.pop()** removes an element at the end of an array.
-
   const head = snakeBody[0];
-
-  // TODO:may have problem here...
   head.x += direction.x;
   head.y += direction.y;
 
-  //   snakeBody.unshift(head);
-  //   snakeBody.pop();
+  for (let i = snakeBody.length - 2; i >= 0; i--) {
+    snakeBody[i + 1] = { ...snakeBody[i] };
+  }
 }
 
-// NOTES: the moveSnake() find the first segment and in the direction we can change the position of the new element. then i .unshift() this new element ie: the head of the snake, and .pop() the last element from the array.
-
-// NOTES: the implementation below works as well, but i find my version much simpler.
-
-// **********this works just fine *************
-
-// function moveSnake() {
-//   for (let i = snakeBody.length - 2; i >= 0; i--) {
-//     snakeBody[i + 1] = { ...snakeBody[i] };
-//   }
-//   snakeBody[0].x += 0;
-//   snakeBody[0].y += 1;
-// }
+// NOTES: in moveSnake() the head of the snake will be the coordinates of the input direction. thats the head moving alone, but in the loop i take each segment and shift it to the one ahead.
 
 // DOCUMENTATION i used here:
 // https://developer.mozilla.org/en-US/docs/Web/API/Document/keydown_event
-//developer.mozilla.org/en-US/docs/Web/Events
+// https://developer.mozilla.org/en-US/docs/Web/Events
+
+// TODO:  i want to make sure the snake cannot switch direction on the spot -ie: if goes right then cannot switch to left
 
 document.addEventListener('keydown', changeDirection);
 
