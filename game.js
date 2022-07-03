@@ -1,6 +1,6 @@
 let start, totalTimeElapsed, previousTimeStamp;
 let gameOver = false;
-const snakeSpeed = 15;
+const snakeSpeed = 20;
 
 function gameFlow(currentTime) {
   if (start === undefined) {
@@ -23,7 +23,11 @@ function gameFlow(currentTime) {
   drawSnake();
   drawFood();
   moveSnake();
-  isFoodFound();
+  if (isFoodFound()) {
+    console.log('found a food');
+    /*create new random food*/ createRandomFood();
+    /*increment snake length*/ growSnake();
+  }
 }
 
 window.requestAnimationFrame(gameFlow);
@@ -98,35 +102,51 @@ function changeDirection(e) {
   }
 }
 
-const food = [{ x: 21, y: 30 }];
+let food = [{ x: 21, y: 30 }];
 
 function drawFood() {
-  food.forEach((item) => {
-    const food = document.createElement('div');
-    food.style.gridRowStart = item.y;
-    food.style.gridColumnStart = item.x;
-    food.classList.add('food');
-    gameBoard.append(food);
-  });
-}
-
-// NOTES: drawFood() works just like drawSnake() - it displayes a division on the game board. coordinates of the food is const food.
-
-function isFoodFound() {
-  if (food[0].x === snakeBody[0].x && food[0].y === snakeBody[0].y) {
-    console.log('found a food');
-
-    snakeBody.push({ ...food[0] });
-    // TODO: after eatch the fruit automatically regenarate a new fruit, make it random.
+  try {
+    food.forEach((item) => {
+      const food = document.createElement('div');
+      food.style.gridRowStart = item.y;
+      food.style.gridColumnStart = item.x;
+      food.classList.add('food');
+      gameBoard.append(food);
+    });
+  } catch (error) {
+    console.error(error);
   }
 }
 
-// NOTES: isFoodFound() simply checks the snake found food. this is run every iteration of the game.
+// NOTES: drawFood() works just like drawSnake() - it displayes a division on the game board. coordinates of the food is const food. - in case the food array is empty - ie. there is now food, then throws arror.
 
-// TODO: if sneak head touches the fruit, then i want to remove the fruit from the board, and grow the snake. - this will be done by a function which will take the location of the fuit and push it into the snakeBody
+function isFoodFound() {
+  if (food[0].x === snakeBody[0].x && food[0].y === snakeBody[0].y) {
+    //console.log('found a food');
+    return true;
+  }
+}
+
+// NOTES: isFoodFound() simply checks the snake found food. this is run every iteration of the game. -> return true only.
+
+function createRandomFood() {
+  let newFood = { x: 0, y: 0 };
+  newFood.x = Math.floor(Math.random() * 35) + 1;
+  newFood.y = Math.floor(Math.random() * 35) + 1;
+  console.log('new food', newFood);
+  food[0] = newFood;
+}
+
+function growSnake() {
+  snakeBody.push({ ...food[0] });
+}
+
+// NOTES:
+// DOCUMENTATION i used here:
+// https://www.w3schools.com/js/js_random.asp
 
 // TODO: i want to create a variable for the expension, lets say when the snake eats an apple it will grow by 1 but when eat an orange it will grow by 2
 // TODO: food should be placed in random positions, but never on a position where the snake is already.
-// TODO: game-over: if snake hits wall, or if snake hits itself
 
+// TODO: game-over: if snake hits wall, or if snake hits itself
 // TODO: BUG : snake does not grow after the first fruit :(
