@@ -1,5 +1,5 @@
 let start, totalTimeElapsed, previousTimeStamp;
-let gameOver = false;
+let gameOver = true;
 const snakeSpeed = 10;
 
 function gameFlow(currentTime) {
@@ -17,7 +17,6 @@ function gameFlow(currentTime) {
 
   if (secondsSinceLastRender < 1 / snakeSpeed) return;
 
-  //console.log('render game board');
   previousTimeStamp = currentTime;
 
   drawSnake();
@@ -43,22 +42,7 @@ window.requestAnimationFrame(gameFlow);
 
 const gameBoard = document.getElementById('game-board-grid');
 
-let snakeBody = [
-  { x: 10, y: 10 },
-  // { x: 11, y: 10 },
-  // { x: 12, y: 10 },
-  // { x: 13, y: 10 },
-  // { x: 14, y: 10 },
-  // { x: 15, y: 10 },
-  // { x: 16, y: 10 },
-  // { x: 17, y: 10 },
-  // { x: 18, y: 10 },
-  // { x: 19, y: 10 },
-  // { x: 20, y: 10 },
-  // { x: 21, y: 10 },
-  // { x: 22, y: 10 },
-  // { x: 23, y: 10 },
-];
+let snakeBody = [{ x: 10, y: 10 }];
 
 function drawSnake() {
   // this is important -- before we re-draw the snake we must clear off the game board
@@ -102,7 +86,6 @@ function moveSnake() {
 document.addEventListener('keydown', changeDirection);
 
 function changeDirection(e) {
-  console.log(e.code);
   if (e.code === 'ArrowUp' && direction.y === 0) {
     direction = { x: 0, y: -1 };
   }
@@ -140,26 +123,34 @@ function drawFood() {
 
 function isFoodFound() {
   if (food[0].x === snakeBody[0].x && food[0].y === snakeBody[0].y) {
-    //console.log('found a food');
     return true;
   }
 }
 
 // NOTES: isFoodFound() simply checks the snake found food. this is run every iteration of the game. -> return true only.
 
+const numberOfFood = 1;
+
 function createRandomFood() {
-  let newFood = { x: 0, y: 0 };
-  newFood.x = Math.floor(Math.random() * 35) + 1;
-  newFood.y = Math.floor(Math.random() * 35) + 1;
-  //console.log('new food', newFood);
-  food[0] = newFood;
+  let newFoods = [];
+  for (let i = 0; i < numberOfFood; i++) {
+    let newFood = { x: 0, y: 0 };
+    newFood.x = Math.floor(Math.random() * 35) + 1;
+    newFood.y = Math.floor(Math.random() * 35) + 1;
+    newFoods.push(newFood);
+  }
+  food = newFoods;
 }
 
 // DOCUMENTATION i used here:
 // https://www.w3schools.com/js/js_random.asp
 
+const growBy = 10;
+
 function growSnake() {
-  snakeBody.push({ ...snakeBody[snakeBody.length - 1] });
+  for (let i = 0; i < growBy; i++) {
+    snakeBody.push({ ...snakeBody[snakeBody.length - 1] });
+  }
 }
 
 // NOTES: growSnake() takes the position of the last segment of the snake and pushes it into snakeBody.
@@ -196,12 +187,6 @@ function hitTheSnake() {
 //     return true;
 //   }
 // }
-
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
-
-// TODO: game-over: if snake hits wall, or if snake hits itself
-
-// TODO: i want to create a variable for the expension, lets say when the snake eats an apple it will grow by 1 but when eat an orange it will grow by 2
 
 // TODO: BUG : snake does not grow after the first fruit
 // TODO: BUG: food should be placed in random positions, but never on a position where the snake is already.

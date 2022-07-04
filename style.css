@@ -2,36 +2,118 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: sans-serif;
 }
 
 body {
     height: 100vh;
     width: 100vw;
 
-    display: flex;
+    display: grid;
+    grid-template:
+            ". title ." 150px 
+            "score game-board time" 1fr 
+            ". start ." 150px / 
+            1fr 1fr 1fr;
+
     justify-content: center;
     align-items: center;
 
-    background-color: turquoise;
+    background-color: #000a12;
 }
 
 #game-board-grid {
-    width: 95vmin;
-    height: 95vmin;
+    width: 60vmin;
+    height: 60vmin;
 
-    background-color: white;
+    background-color: #000a12;
+    border: #bdbdbd 5px solid;
 
     display: grid;
+    grid-area: game-board;
     grid-template-columns: repeat(35, 1fr);
     grid-template-rows: repeat(35, 1fr);
+    
 }
 
 .snake {
-    background-color: #f61568;
+    background-color: #00DE6B;
     border: 1px solid black;
+    box-shadow: 0px 0px 29px -1px #00DE6B
+ 
 }
 
 .food {
-    background-color: orange;
+    background-color: #f61568;
     border: 1px solid black;
+    box-shadow: 0px 0px 29px -1px #F61568
+}
+
+.title {
+    grid-area: title;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    color: #bdbdbd
+
+}
+
+
+.score {
+    grid-area: score;
+    display: grid;
+
+    place-content: center;
+    grid-template-rows: auto, auto;
+
+    color: #bdbdbd;
+    font-weight: 700;
+    
+}
+
+.vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.score-num {
+    padding: 10px;
+    font-size: 35px;
+}
+
+.time-num {
+    padding: 10px;
+    font-size: 35px;
+}
+
+.time {
+    grid-area: time;
+    display: grid;
+    
+    place-content: center;
+    grid-template-rows: auto, auto;
+    
+    color: #bdbdbd;
+    font-weight: 700;
+    
+}
+
+.start{
+    grid-area: start;
+    display: flex;
+    place-self: center;
+    justify-content: center;
+        
+    color: #000a12;
+    background-color: #bdbdbd;
+
+    width: 100px;
+    padding: 10px;
+    border-radius: 50px;
+
+    font-weight: 700
+    
 }
