@@ -1,13 +1,14 @@
 let start, totalTimeElapsed, previousTimeStamp;
-let gameOver = true;
+let gameOver = false;
 const snakeSpeed = 10;
+let score = 0;
 
 function gameFlow(currentTime) {
   if (start === undefined) {
     start = currentTime;
   }
 
-  totalTimeElapsed = currentTime - start;
+  totalTimeElapsed = ((currentTime - start) / 1000).toFixed(2);
 
   if (gameOver !== true) {
     window.requestAnimationFrame(gameFlow);
@@ -22,6 +23,7 @@ function gameFlow(currentTime) {
   drawSnake();
   drawFood();
   moveSnake();
+  updateTime();
 
   if (hitTheWall()) {
     gameOver = true;
@@ -66,6 +68,7 @@ let direction = { x: 0, y: 0 };
 function moveSnake() {
   if (isFoodFound()) {
     growSnake();
+    updateScore();
     createRandomFood();
   }
   const head = snakeBody[0];
@@ -190,3 +193,30 @@ function hitTheSnake() {
 
 // TODO: BUG : snake does not grow after the first fruit
 // TODO: BUG: food should be placed in random positions, but never on a position where the snake is already.
+
+function updateScore() {
+  score += growBy;
+  const displayScore = document.getElementById('score-num');
+  displayScore.innerText = score;
+}
+
+function updateTime() {
+  const displayTime = document.getElementById('time-num');
+  displayTime.innerText = totalTimeElapsed;
+}
+
+const startButton = document.getElementById('start');
+startButton.addEventListener('click', () => {
+  console.log('david is here');
+  switchStartButton();
+});
+
+function switchStartButton() {
+  if (startButton.innerText === 'START') {
+    startButton.innerText = 'PAUSE';
+  } else {
+    startButton.innerText = 'START';
+  }
+}
+
+// NOTES: i introdued functions of DOM manipulation for the button, time and score.

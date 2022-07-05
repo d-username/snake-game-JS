@@ -79,12 +79,12 @@ body {
     font-size: 20px;
 }
 
-.score-num {
+#score-num {
     padding: 10px;
     font-size: 35px;
 }
 
-.time-num {
+#time-num {
     padding: 10px;
     font-size: 35px;
 }
@@ -101,7 +101,7 @@ body {
     
 }
 
-.start{
+#start{
     grid-area: start;
     display: flex;
     place-self: center;
@@ -114,6 +114,7 @@ body {
     padding: 10px;
     border-radius: 50px;
 
-    font-weight: 700
+    font-weight: 700;
+    cursor: pointer;
     
 }
