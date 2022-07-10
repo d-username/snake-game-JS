@@ -33,7 +33,7 @@ body {
     grid-area: game-board;
     grid-template-columns: repeat(35, 1fr);
     grid-template-rows: repeat(35, 1fr);
-    
+
 }
 
 .snake {
@@ -77,6 +77,11 @@ body {
     text-orientation: mixed;
     padding: 10px;
     font-size: 20px;
+    place-self: center;
+}
+
+.vertical-ltr {
+    transform: rotate(180deg);
 }
 
 #score-num {
