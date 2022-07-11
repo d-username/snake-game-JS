@@ -1,32 +1,28 @@
-let food = [{ x: 21, y: 30 }];
+import { snakeBody } from './snake.js';
+
+let food = [{ x: 20, y: 20 }];
 const numberOfFood = 1;
 
 function createRandomFood() {
-  let newFoods = [];
   for (let i = 0; i < numberOfFood; i++) {
-    let newFood = { x: 0, y: 0 };
+    let newFood = { x: null, y: null };
     newFood.x = Math.floor(Math.random() * 35) + 1;
     newFood.y = Math.floor(Math.random() * 35) + 1;
-    newFoods.push(newFood);
+    food[0] = newFood;
   }
-  food = newFoods;
 }
 
 function drawFood(gameBoard) {
-  try {
-    food.forEach((item) => {
-      const food = document.createElement('div');
-      food.style.gridRowStart = item.y;
-      food.style.gridColumnStart = item.x;
-      food.classList.add('food');
-      gameBoard.append(food);
-    });
-  } catch (error) {
-    console.error(error);
-  }
+  food.forEach((item) => {
+    const food = document.createElement('div');
+    food.style.gridRowStart = item.y;
+    food.style.gridColumnStart = item.x;
+    food.classList.add('food');
+    gameBoard.append(food);
+  });
 }
 
-function isFoodFound(snakeBody) {
+function isFoodFound() {
   if (food[0].x === snakeBody[0].x && food[0].y === snakeBody[0].y) {
     return true;
   }

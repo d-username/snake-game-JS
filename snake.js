@@ -13,16 +13,12 @@ function drawSnake(gameBoard) {
 }
 
 function growSnake() {
-  console.log('food is found and i am in grow snake');
-
   for (let i = 0; i < growBy; i++) {
-    console.log(snakeBody, 'before');
-    snakeBody.push(food[0]);
-    console.log(snakeBody, 'after');
+    snakeBody.push(snakeBody[snakeBody.length - 1]);
   }
 }
 
-export { snakeBody, drawSnake, growSnake };
+export { snakeBody, drawSnake, growSnake, growBy };
 
 // NOTES: growSnake() takes the position of the last segment of the snake and pushes it into snakeBody.
 

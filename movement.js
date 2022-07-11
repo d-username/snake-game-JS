@@ -1,13 +1,13 @@
 let direction = { x: 0, y: 0 };
 
 function moveSnake(snakeBody) {
-  const head = snakeBody[0];
-  head.x += direction.x;
-  head.y += direction.y;
-
   for (let i = snakeBody.length - 2; i >= 0; i--) {
     snakeBody[i + 1] = { ...snakeBody[i] };
   }
+
+  const head = snakeBody[0];
+  head.x += direction.x;
+  head.y += direction.y;
 }
 
 document.addEventListener('keydown', changeDirection);

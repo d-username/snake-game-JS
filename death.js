@@ -1,6 +1,6 @@
 import { snakeBody } from './snake.js';
 
-function hitTheWall(snakeBody) {
+function hitTheWall() {
   if (
     snakeBody[0].x === -1 ||
     snakeBody[0].x === 37 ||
@@ -13,7 +13,6 @@ function hitTheWall(snakeBody) {
 
 function hitTheSnake(isOnSnake) {
   if (isOnSnake(snakeBody[0])) {
-    console.log('here');
     return true;
   }
 }

@@ -1,3 +1,5 @@
+import { growBy } from './snake.js';
+
 let score = 0;
 
 function updateScore() {
