@@ -3,12 +3,12 @@ import { snakeBody, drawSnake, growSnake } from './snake.js';
 import { moveSnake } from './movement.js';
 import { hitTheSnake, hitTheWall } from './death.js';
 import { updateScore, updateTime, score } from './time-score.js';
-// import { isOnSnake, samePosition } from './positionChecks.js';
 
 const gameBoard = document.getElementById('game-board-grid');
 let start, totalTimeElapsed, previousTimeStamp;
 let gameOver = false;
 const snakeSpeed = 10;
+let timerOn = true;
 
 function gameFlow(currentTime) {
   if (start === undefined) {
@@ -26,10 +26,18 @@ function gameFlow(currentTime) {
 
   previousTimeStamp = currentTime;
 
+  if (timerOn) {
+    updateTime(totalTimeElapsed);
+  }
+
   if (!gameOver) {
     drawSnake(gameBoard);
     drawFood(gameBoard);
     moveSnake(snakeBody);
+
+    if (hitTheWall() || hitTheSnake()) {
+      gameOver = true;
+    }
 
     if (isFoodFound()) {
       growSnake();
@@ -37,16 +45,6 @@ function gameFlow(currentTime) {
       createRandomFood();
     }
   }
-
-  // if (hitTheWall) {
-  //   // gameOver = true;
-  //   // alert('Game Over - You hit the Wall');
-  // }
-
-  // if (hitTheSnake(isOnSnake)) {
-  //   gameOver = true;
-  //   alert('Game Over - You hit the Snake');
-  // }
 }
 
 window.requestAnimationFrame(gameFlow);

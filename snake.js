@@ -1,5 +1,5 @@
 let snakeBody = [{ x: 10, y: 10 }];
-const growBy = 1;
+const growBy = 5;
 
 function drawSnake(gameBoard) {
   gameBoard.innerHTML = '';
