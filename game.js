@@ -5,10 +5,15 @@ import { hitTheSnake, hitTheWall } from './death.js';
 import { updateScore, updateTime } from './time-score.js';
 
 const gameBoard = document.getElementById('game-board-grid');
+const buttonRestart = document.getElementById('restart');
 let previousTimeStamp;
 let gameOver = false;
 export let timerIsOn = false;
 const snakeSpeed = 10;
+
+buttonRestart.addEventListener('click', function () {
+  location.reload();
+});
 
 export function setTimerIsOn() {
   timerIsOn = true;

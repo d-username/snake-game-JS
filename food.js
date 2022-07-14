@@ -1,6 +1,6 @@
 import { snakeBody } from './snake.js';
 
-let food = [{ x: 20, y: 20 }];
+let food = [];
 const numberOfFood = 1;
 
 function createRandomFood() {
@@ -13,6 +13,7 @@ function createRandomFood() {
 }
 
 function drawFood(gameBoard) {
+  if (food.length === 0) createRandomFood();
   food.forEach((item) => {
     const food = document.createElement('div');
     food.style.gridRowStart = item.y;

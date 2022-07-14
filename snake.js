@@ -1,4 +1,4 @@
-let snakeBody = [{ x: 10, y: 10 }];
+let snakeBody = [{ x: 18, y: 18 }];
 const growBy = 5;
 
 function drawSnake(gameBoard) {
@@ -17,6 +17,8 @@ function growSnake() {
     snakeBody.push(snakeBody[snakeBody.length - 1]);
   }
 }
+
+//here i want to be able to set the grow by...
 
 export { snakeBody, drawSnake, growSnake, growBy };
 
