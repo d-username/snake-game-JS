@@ -1,6 +1,6 @@
 import { createRandomFood, drawFood, isFoodFound } from './food.js';
 import { snakeBody, drawSnake, growSnake } from './snake.js';
-import { moveSnake } from './movement.js';
+import { moveSnake, snakeSpeed } from './movement.js';
 import { hitTheSnake, hitTheWall } from './death.js';
 import { updateScore, updateTime } from './time-score.js';
 
@@ -10,9 +10,8 @@ const intro = document.getElementById('intro');
 const gameOverSign = document.getElementById('game-over');
 
 let previousTimeStamp;
-let gameOver = false;
+let gameOver = true;
 export let timerIsOn = false;
-const snakeSpeed = 10;
 
 buttonRestart.addEventListener('click', function () {
   location.reload();
@@ -20,6 +19,7 @@ buttonRestart.addEventListener('click', function () {
 
 export function setTimerIsOn() {
   timerIsOn = true;
+  intro.classList.replace('show', 'hide');
 }
 
 function gameFlow(currentTime) {
@@ -44,7 +44,7 @@ function gameFlow(currentTime) {
 
   if (hitTheWall() || hitTheSnake(snakeBody[0])) {
     gameOver = true;
-    // gameOverSign.classList.replace('none', 'block');
+    gameOverSign.classList.replace('hide', 'show');
   }
 
   if (isFoodFound()) {
@@ -61,6 +61,6 @@ window.requestAnimationFrame(gameFlow);
 // DOCUMENTATION i used here:
 // https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
 
-// TODO: rearrange layout. inc. stats, button, bottom will be game over
-// TODO: game over notification on bottom
 // TODO: make food random colours
+// TODO: in stats section make it possible to change the snake body growing rate with an input field AND also the speed should be adjustable.
+// TODO: the game over on the top is not aligned when on full screen width

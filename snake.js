@@ -1,5 +1,8 @@
 let snakeBody = [{ x: 18, y: 18 }];
-const growBy = 5;
+const growBy = 10;
+
+const displayGrowingRate = document.getElementById('grow-num');
+displayGrowingRate.innerText = growBy;
 
 function drawSnake(gameBoard) {
   gameBoard.innerHTML = '';

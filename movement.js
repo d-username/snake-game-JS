@@ -2,6 +2,10 @@ import { startTimer } from './time-score.js';
 import { timerIsOn } from './game.js';
 
 let direction = { x: 0, y: 0 };
+const snakeSpeed = 10;
+
+const displaySpeed = document.getElementById('speed-num');
+displaySpeed.innerText = snakeSpeed;
 
 function moveSnake(snakeBody) {
   for (let i = snakeBody.length - 2; i >= 0; i--) {
@@ -42,7 +46,7 @@ function changeDirection(e) {
   }
 }
 
-export { moveSnake };
+export { moveSnake, snakeSpeed };
 
 // NOTES: in moveSnake() the head of the snake will be the coordinates of the input direction. thats the head moving alone, but in the loop i take each segment and shift it to the one ahead.
 

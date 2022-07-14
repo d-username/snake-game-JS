@@ -36,10 +36,8 @@ body {
 }
 
 .snake {
-    /* background-color: #00DE6B; */
     background-color: #40E0D0;
     border: 1px solid black;
-    /* box-shadow: 0px 0px 29px -1px #00DE6B */
     box-shadow: 0px 0px 29px -1px #40E0D0
 }
 
@@ -111,12 +109,16 @@ body {
     height: fit-content;
 
     color: #bdbdbd;
-    border:  1px solid red;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 2px;
+
+    margin-left: 2em;
+    gap: 30px;
 }
 
 .score,
 .time {
-    border: 1px yellow solid;
+    padding: 5px;
 }
 
 #intro {
@@ -136,4 +138,19 @@ body {
 
 .hide {
     display: none;
+}
+
+.show {
+    display: block;
+}
+
+.nums {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    padding-top: 5px;
+}
+
+.stats-text {
+    color: #40E0D0;
 }
