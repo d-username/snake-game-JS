@@ -1,3 +1,6 @@
+import { startTimer } from './time-score.js';
+import { timerIsOn } from './game.js';
+
 let direction = { x: 0, y: 0 };
 
 function moveSnake(snakeBody) {
@@ -15,15 +18,27 @@ document.addEventListener('keydown', changeDirection);
 function changeDirection(e) {
   if (e.code === 'ArrowUp' && direction.y === 0) {
     direction = { x: 0, y: -1 };
+    if (timerIsOn === false) {
+      startTimer();
+    }
   }
   if (e.code === 'ArrowLeft' && direction.x === 0) {
     direction = { x: -1, y: 0 };
+    if (timerIsOn === false) {
+      startTimer();
+    }
   }
   if (e.code === 'ArrowDown' && direction.y === 0) {
     direction = { x: 0, y: +1 };
+    if (timerIsOn === false) {
+      startTimer();
+    }
   }
   if (e.code === 'ArrowRight' && direction.x === 0) {
     direction = { x: +1, y: 0 };
+    if (timerIsOn === false) {
+      startTimer();
+    }
   }
 }
 

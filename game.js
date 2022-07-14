@@ -2,20 +2,19 @@ import { createRandomFood, drawFood, isFoodFound } from './food.js';
 import { snakeBody, drawSnake, growSnake } from './snake.js';
 import { moveSnake } from './movement.js';
 import { hitTheSnake, hitTheWall } from './death.js';
-import { updateScore, updateTime, score } from './time-score.js';
+import { updateScore, updateTime } from './time-score.js';
 
 const gameBoard = document.getElementById('game-board-grid');
-let start, totalTimeElapsed, previousTimeStamp;
+let previousTimeStamp;
 let gameOver = false;
+export let timerIsOn = false;
 const snakeSpeed = 10;
-let timerOn = true;
+
+export function setTimerIsOn() {
+  timerIsOn = true;
+}
 
 function gameFlow(currentTime) {
-  if (start === undefined) {
-    start = currentTime;
-  }
-  totalTimeElapsed = ((currentTime - start) / 1000).toFixed(2);
-
   if (!gameOver) {
     window.requestAnimationFrame(gameFlow);
   }
@@ -23,27 +22,27 @@ function gameFlow(currentTime) {
   const secondsSinceLastRender = (currentTime - previousTimeStamp) / 1000;
 
   if (secondsSinceLastRender < 1 / snakeSpeed) return;
-
   previousTimeStamp = currentTime;
-
-  if (timerOn) {
-    updateTime(totalTimeElapsed);
-  }
 
   if (!gameOver) {
     drawSnake(gameBoard);
     drawFood(gameBoard);
     moveSnake(snakeBody);
+  }
 
-    if (hitTheWall() || hitTheSnake()) {
-      gameOver = true;
-    }
+  if (timerIsOn) {
+    updateTime();
+  }
 
-    if (isFoodFound()) {
-      growSnake();
-      updateScore();
-      createRandomFood();
-    }
+  if (hitTheWall() || hitTheSnake()) {
+    gameOver = true;
+    alert('Game Over');
+  }
+
+  if (isFoodFound()) {
+    growSnake();
+    updateScore();
+    createRandomFood();
   }
 }
 
@@ -53,6 +52,3 @@ window.requestAnimationFrame(gameFlow);
 
 // DOCUMENTATION i used here:
 // https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
-
-// TODO: BUG : snake does not grow after the first fruit
-// TODO: BUG: food should be placed in random positions, but never on a position where the snake is already.
