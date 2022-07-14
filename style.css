@@ -12,8 +12,8 @@ body {
     display: grid;
     grid-template:
             ". title ." 150px 
-            "score game-board time" 1fr 
-            ". start ." 150px / 
+            "restart game-board stats" 1fr 
+            ". game-over ." 150px / 
             1fr 1fr 1fr;
 
     justify-content: center;
@@ -36,9 +36,11 @@ body {
 }
 
 .snake {
-    background-color: #00DE6B;
+    /* background-color: #00DE6B; */
+    background-color: #40E0D0;
     border: 1px solid black;
-    box-shadow: 0px 0px 29px -1px #00DE6B
+    /* box-shadow: 0px 0px 29px -1px #00DE6B */
+    box-shadow: 0px 0px 29px -1px #40E0D0
 }
 
 .food {
@@ -47,73 +49,91 @@ body {
     box-shadow: 0px 0px 29px -1px #F61568
 }
 
-.title {
+#title {
     grid-area: title;
     display: grid;
     justify-content: center;
     align-items: center;
 
-    color: #bdbdbd
-}
-
-
-.score {
-    grid-area: score;
-    display: grid;
-
-    place-content: center;
-    grid-template-rows: auto, auto;
-
     color: #bdbdbd;
-    font-weight: 700;   
-}
-
-.vertical {
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    padding: 10px;
-    font-size: 20px;
-    place-self: center;
-}
-
-.vertical-ltr {
-    transform: rotate(180deg);
-}
-
-#score-num {
-    padding: 10px;
-    font-size: 35px;
-}
-
-#time-num {
-    padding: 10px;
-    font-size: 35px;
-}
-
-.time {
-    grid-area: time;
-    display: grid;
-    
-    place-content: center;
-    grid-template-rows: auto, auto;
-    
-    color: #bdbdbd;
-    font-weight: 700;
+    font-family: 'Righteous', cursive;
+    font-size: 3em;
+    letter-spacing: 2px;
 }
 
 #restart{
-    grid-area: start;
+    grid-area: restart;
+
     display: flex;
-    place-self: center;
+    justify-self: flex-end;
     justify-content: center;
+    align-items: center;
         
     color: #000a12;
     background-color: #bdbdbd;
 
-    width: 100px;
     padding: 10px;
+    margin:40px;
     border-radius: 50px;
+    border: none;
+    gap:5px;
 
-    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
     cursor: pointer;
+    transition: 0.3s;
+    transform: rotate(-90deg);
+}
+
+#restart:hover {
+    background-color: #40E0D0;
+    box-shadow: 0px 0px 29px -1px #40E0D0
+}
+
+#bottom {
+    grid-area: game-over;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    align-self: flex-start;
+    margin-top: 2em;
+    
+    color: #bdbdbd
+}
+
+#stats {
+    grid-area: stats;
+    
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+
+    color: #bdbdbd;
+    border:  1px solid red;
+}
+
+.score,
+.time {
+    border: 1px yellow solid;
+}
+
+#intro {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 1.5em;
+    letter-spacing: 1px;
+    justify-self: center;
+}
+
+#game-over {
+    font-family: 'Righteous', cursive;
+    font-size: 3em;
+    letter-spacing: 2px;
+    justify-self: center;
+}
+
+.hide {
+    display: none;
 }

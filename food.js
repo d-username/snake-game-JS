@@ -1,3 +1,4 @@
+import { hitTheSnake } from './death.js';
 import { snakeBody } from './snake.js';
 
 let food = [];
@@ -8,6 +9,9 @@ function createRandomFood() {
     let newFood = { x: null, y: null };
     newFood.x = Math.floor(Math.random() * 35) + 1;
     newFood.y = Math.floor(Math.random() * 35) + 1;
+    if (hitTheSnake(newFood)) {
+      createRandomFood();
+    }
     food[0] = newFood;
   }
 }

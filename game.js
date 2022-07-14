@@ -6,6 +6,9 @@ import { updateScore, updateTime } from './time-score.js';
 
 const gameBoard = document.getElementById('game-board-grid');
 const buttonRestart = document.getElementById('restart');
+const intro = document.getElementById('intro');
+const gameOverSign = document.getElementById('game-over');
+
 let previousTimeStamp;
 let gameOver = false;
 export let timerIsOn = false;
@@ -39,9 +42,9 @@ function gameFlow(currentTime) {
     updateTime();
   }
 
-  if (hitTheWall() || hitTheSnake()) {
+  if (hitTheWall() || hitTheSnake(snakeBody[0])) {
     gameOver = true;
-    alert('Game Over');
+    // gameOverSign.classList.replace('none', 'block');
   }
 
   if (isFoodFound()) {
@@ -57,3 +60,7 @@ window.requestAnimationFrame(gameFlow);
 
 // DOCUMENTATION i used here:
 // https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+
+// TODO: rearrange layout. inc. stats, button, bottom will be game over
+// TODO: game over notification on bottom
+// TODO: make food random colours

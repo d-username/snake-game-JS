@@ -11,12 +11,9 @@ function hitTheWall() {
   }
 }
 
-function hitTheSnake() {
-  for (let i = 3; i < snakeBody.length; i++) {
-    if (
-      snakeBody[0].x === snakeBody[i].x &&
-      snakeBody[0].y === snakeBody[i].y
-    ) {
+function hitTheSnake(position) {
+  for (let i = 1; i < snakeBody.length; i++) {
+    if (position.x === snakeBody[i].x && position.y === snakeBody[i].y) {
       return true;
     }
   }
