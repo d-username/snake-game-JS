@@ -148,9 +148,41 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-size: 2rem;
     font-weight: bold;
-    padding-top: 5px;
+    padding-top: 7px;
 }
 
 .stats-text {
     color: #40E0D0;
+}
+
+.flex {
+    display: flex;
+}
+
+.control-buttons {
+    display: grid;
+    align-content: space-around;
+    margin-left: 20px;
+}
+
+.little-button {
+    display: block;
+    width: 30px;
+    height: 30px;
+
+    color: #000a12;
+    background-color: #bdbdbd;
+
+    border-radius: 50px;
+    border: none;
+    margin: 3px;
+    
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+
+.little-button:hover {
+    background-color: #40E0D0;
+    box-shadow: 0px 0px 29px -1px #40E0D0
 }

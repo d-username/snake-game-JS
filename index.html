@@ -17,6 +17,14 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,500,0,0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,500,0,0"
+    />
   </head>
   <body>
     <h1 id="title">The Snake Game</h1>
@@ -29,13 +37,35 @@
         <p class="stats-text">Time</p>
         <p class="nums" id="time-num">00:00</p>
       </div>
-      <div class="speed">
-        <p class="stats-text">Speed</p>
-        <p class="nums" id="speed-num">0</p>
+
+      <div class="speed flex">
+        <div>
+          <p class="stats-text">Speed</p>
+          <p class="nums" id="speed-num">10</p>
+        </div>
+        <div class="control-buttons">
+          <button class="little-button" id="speedUp">
+            <span class="material-symbols-rounded"> north </span>
+          </button>
+          <button class="little-button" id="speedDown">
+            <span class="material-symbols-rounded"> south </span>
+          </button>
+        </div>
       </div>
-      <div class="grow-rate">
-        <p class="stats-text">Grow by</p>
-        <p class="nums" id="grow-num">0</p>
+
+      <div class="grow-rate flex">
+        <div>
+          <p class="stats-text">Grow by</p>
+          <p class="nums" id="grow-num">0</p>
+        </div>
+        <div class="control-buttons">
+          <button class="little-button" id="growByUp">
+            <span class="material-symbols-rounded"> north </span>
+          </button>
+          <button class="little-button" id="growByDown">
+            <span class="material-symbols-rounded"> south </span>
+          </button>
+        </div>
       </div>
     </section>
     <button id="restart">

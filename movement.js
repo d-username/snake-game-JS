@@ -1,11 +1,24 @@
 import { startTimer } from './time-score.js';
 import { timerIsOn } from './game.js';
 
-let direction = { x: 0, y: 0 };
-const snakeSpeed = 10;
+const speedUp = document.getElementById('speedUp');
+const speedDown = document.getElementById('speedDown');
 
-const displaySpeed = document.getElementById('speed-num');
-displaySpeed.innerText = snakeSpeed;
+speedUp.addEventListener('click', function () {
+  adjustSnakeSpeed('increase');
+});
+
+speedDown.addEventListener('click', function () {
+  adjustSnakeSpeed('decrease');
+});
+
+let direction = { x: 0, y: 0 };
+let snakeSpeed = 10;
+
+function updateSpeed() {
+  const displaySpeed = document.getElementById('speed-num');
+  displaySpeed.innerText = snakeSpeed;
+}
 
 function moveSnake(snakeBody) {
   for (let i = snakeBody.length - 2; i >= 0; i--) {
@@ -43,6 +56,17 @@ function changeDirection(e) {
     if (timerIsOn === false) {
       startTimer();
     }
+  }
+}
+
+function adjustSnakeSpeed(value) {
+  if (value === 'increase') {
+    snakeSpeed++;
+    updateSpeed();
+  }
+  if (value === 'decrease' && snakeSpeed > 1) {
+    snakeSpeed--;
+    updateSpeed();
   }
 }
 

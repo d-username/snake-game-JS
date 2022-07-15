@@ -10,7 +10,7 @@ const intro = document.getElementById('intro');
 const gameOverSign = document.getElementById('game-over');
 
 let previousTimeStamp;
-let gameOver = true;
+let gameOver = false;
 export let timerIsOn = false;
 
 buttonRestart.addEventListener('click', function () {
@@ -61,6 +61,6 @@ window.requestAnimationFrame(gameFlow);
 // DOCUMENTATION i used here:
 // https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
 
+// Possible todos:
 // TODO: make food random colours
-// TODO: in stats section make it possible to change the snake body growing rate with an input field AND also the speed should be adjustable.
 // TODO: the game over on the top is not aligned when on full screen width

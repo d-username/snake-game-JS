@@ -1,7 +1,33 @@
-let snakeBody = [{ x: 18, y: 18 }];
-const growBy = 10;
-
 const displayGrowingRate = document.getElementById('grow-num');
+const GrowByUp = document.getElementById('growByUp');
+const GrowByDown = document.getElementById('growByDown');
+
+let snakeBody = [{ x: 18, y: 18 }];
+let growBy = 10;
+
+GrowByUp.addEventListener('click', function () {
+  adjustGrowBy('increase');
+});
+
+GrowByDown.addEventListener('click', function () {
+  adjustGrowBy('decrease');
+});
+
+function adjustGrowBy(value) {
+  if (value === 'increase') {
+    growBy++;
+    updateGrowBy();
+  }
+  if (value === 'decrease' && growBy > 1) {
+    growBy--;
+    updateGrowBy();
+  }
+}
+
+function updateGrowBy() {
+  const displayGrowBy = document.getElementById('grow-num');
+  displayGrowBy.innerText = growBy;
+}
 displayGrowingRate.innerText = growBy;
 
 function drawSnake(gameBoard) {
